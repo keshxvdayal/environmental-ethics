@@ -32,7 +32,7 @@ export function AIChat() {
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
       
-      const prompt = `You are an environmental expert. Please answer this question about environmental ethics and sustainability: ${input}`;
+      const prompt = `You are an environmental expert. Please answer this question about environmental ethics and sustainability: ${input}, answer is less then 50 words`;
       
       const result = await model.generateContent(prompt);
       const response = await result.response;
@@ -59,7 +59,7 @@ export function AIChat() {
         <h2 className="text-xl font-semibold">Environmental AI Assistant</h2>
       </div>
       
-      <div className="h-[400px] overflow-y-auto mb-4 space-y-4">
+      <div className="h-[260px] overflow-y-auto mb-4 space-y-4">
         {messages.map((message, index) => (
           <div
             key={index}

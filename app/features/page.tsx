@@ -112,49 +112,7 @@ function FeaturesPage() {
           </div>
         </section>
 
-        {/* Additional Sections */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-8">Our Mission</h2>
-            <p className="text-center text-lg text-gray-700">
-              We aim to empower individuals and communities to live sustainably by providing tools, resources, and a
-              supportive community.
-            </p>
-          </div>
-        </section>
-
-        <section className="py-16 bg-gray-100">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-8">Testimonials</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="p-6 bg-white shadow rounded">
-                <p className="text-gray-700">
-                  "This platform has completely transformed the way I think about sustainability. The tools are
-                  incredibly helpful!"
-                </p>
-                <p className="mt-4 text-right text-green-600 font-bold">- Alex Johnson</p>
-              </div>
-              <div className="p-6 bg-white shadow rounded">
-                <p className="text-gray-700">
-                  "I love the community forum! It's amazing to connect with others who share the same passion for
-                  sustainable living."
-                </p>
-                <p className="mt-4 text-right text-green-600 font-bold">- Maria Lopez</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16 bg-green-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-8">Get Involved</h2>
-            <p className="text-center text-lg text-gray-700 mb-8">
-              Join us in making a difference. Whether it's through volunteering, sharing your story, or contributing to
-              our initiatives, your involvement matters.
-            </p>
-            
-          </div>
-        </section>
+        
       </main>
     </>
   );
