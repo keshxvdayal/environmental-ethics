@@ -55,7 +55,7 @@ export default function CommunityPage() {
     content: "",
   })
 
-  const handlePostSubmit = (e) => {
+  const handlePostSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!newPost.title || !newPost.content) return
 
@@ -80,7 +80,7 @@ export default function CommunityPage() {
     })
   }
 
-  const handleLike = (postId) => {
+  const handleLike = (postId: number) => {
     setPosts(posts.map((post) => (post.id === postId ? { ...post, likes: post.likes + 1 } : post)))
   }
 
@@ -128,14 +128,14 @@ export default function CommunityPage() {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid md:grid-cols-[1fr_300px] gap-8">
             <div>
-              <div className="bg-white p-6 rounded-lg shadow-sm mb-8">
-                <h2 className="text-2xl font-bold mb-6">Community Forum</h2>
-                <p className="mb-6">
+              <div className="bg-white p-6 rounded-xl border border-green-100 mb-8">
+                <h2 className="text-2xl font-bold mb-6 text-green-800">Community Forum</h2>
+                <p className="mb-6 text-gray-700">
                   Connect with like-minded individuals committed to sustainable living. Share your experiences, ask
                   questions, and learn from others in our community.
                 </p>
                 <div className="relative mb-6">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                   <Input placeholder="Search discussions..." className="pl-10" />
                 </div>
 
@@ -147,74 +147,56 @@ export default function CommunityPage() {
                   </TabsList>
 
                   <TabsContent value="discussions" className="space-y-6">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Start a Discussion</CardTitle>
-                        <CardDescription>
-                          Share your thoughts, experiences, or questions with the community
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <form onSubmit={handlePostSubmit}>
-                          <div className="space-y-4">
-                            <div>
-                              <Input
-                                placeholder="Title"
-                                value={newPost.title}
-                                onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
-                              />
-                            </div>
-                            <div>
-                              <Textarea
-                                placeholder="What's on your mind?"
-                                className="min-h-[100px]"
-                                value={newPost.content}
-                                onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
-                              />
-                            </div>
-                          </div>
-                        </form>
-                      </CardContent>
-                      <CardFooter>
+                    <div className="bg-white p-6 rounded-xl border border-green-100 mb-4">
+                      <h3 className="text-lg font-bold mb-2 text-green-700">Start a Discussion</h3>
+                      <p className="mb-4 text-gray-700 text-sm">Share your thoughts, experiences, or questions with the community</p>
+                      <form onSubmit={handlePostSubmit} className="space-y-4">
+                        <Input
+                          placeholder="Title"
+                          value={newPost.title}
+                          onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
+                        />
+                        <Textarea
+                          placeholder="What's on your mind?"
+                          className="min-h-[100px]"
+                          value={newPost.content}
+                          onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
+                        />
                         <Button
-                          onClick={handlePostSubmit}
+                          type="submit"
                           disabled={!newPost.title || !newPost.content}
                           className="bg-green-600 hover:bg-green-700"
                         >
                           Post
                         </Button>
-                      </CardFooter>
-                    </Card>
+                      </form>
+                    </div>
 
                     {posts.map((post) => (
-                      <Card key={post.id}>
-                        <CardHeader>
-                          <div className="flex items-center gap-3 mb-2">
-                            <Image
-                              src={post.avatar || "/placeholder.svg"}
-                              alt={post.author}
-                              width={40}
-                              height={40}
-                              className="rounded-full"
-                            />
-                            <div>
-                              <div className="font-semibold">{post.author}</div>
-                              <div className="text-sm text-muted-foreground">{post.date}</div>
-                            </div>
+                      <div key={post.id} className="bg-white p-6 rounded-xl border border-green-100 mb-4">
+                        <div className="flex items-center gap-3 mb-2">
+                          <Image
+                            src={post.avatar || "/placeholder.svg"}
+                            alt={post.author}
+                            width={40}
+                            height={40}
+                            className="rounded-full"
+                          />
+                          <div>
+                            <div className="font-semibold">{post.author}</div>
+                            <div className="text-sm text-gray-500">{post.date}</div>
                           </div>
-                          <CardTitle className="text-xl">{post.title}</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="mb-4">{post.content}</p>
-                          <div className="flex flex-wrap gap-2">
-                            {post.tags.map((tag) => (
-                              <span key={tag} className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
-                                #{tag}
-                              </span>
-                            ))}
-                          </div>
-                        </CardContent>
-                        <CardFooter className="flex justify-between">
+                        </div>
+                        <h4 className="text-lg font-bold mb-1 text-green-700">{post.title}</h4>
+                        <p className="mb-4 text-gray-700">{post.content}</p>
+                        <div className="flex flex-wrap gap-2 mb-2">
+                          {post.tags.map((tag) => (
+                            <span key={tag} className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
+                              #{tag}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="flex justify-between items-center mt-2">
                           <div className="flex items-center gap-6">
                             <Button
                               variant="ghost"
@@ -233,15 +215,15 @@ export default function CommunityPage() {
                           <Button variant="outline" size="sm">
                             View Discussion
                           </Button>
-                        </CardFooter>
-                      </Card>
+                        </div>
+                      </div>
                     ))}
                   </TabsContent>
 
                   <TabsContent value="questions">
-                    <div className="p-12 text-center">
-                      <h3 className="text-lg font-medium mb-2">Questions & Answers</h3>
-                      <p className="text-muted-foreground mb-4">
+                    <div className="bg-white p-6 rounded-xl border border-green-100 text-center">
+                      <h3 className="text-lg font-medium mb-2 text-green-700">Questions & Answers</h3>
+                      <p className="text-gray-500 mb-4">
                         This section is coming soon! Ask and answer questions about sustainable living.
                       </p>
                       <Button variant="outline">Be notified when launched</Button>
@@ -249,9 +231,9 @@ export default function CommunityPage() {
                   </TabsContent>
 
                   <TabsContent value="events">
-                    <div className="p-12 text-center">
-                      <h3 className="text-lg font-medium mb-2">Local Events</h3>
-                      <p className="text-muted-foreground mb-4">
+                    <div className="bg-white p-6 rounded-xl border border-green-100 text-center">
+                      <h3 className="text-lg font-medium mb-2 text-green-700">Local Events</h3>
+                      <p className="text-gray-500 mb-4">
                         Find and share sustainability events in your area. Coming soon!
                       </p>
                       <Button variant="outline">Be notified when launched</Button>
@@ -262,125 +244,103 @@ export default function CommunityPage() {
             </div>
 
             <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Community Stats</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Members</span>
-                      <span className="font-medium">2,547</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Discussions</span>
-                      <span className="font-medium">342</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Comments</span>
-                      <span className="font-medium">1,203</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Online Now</span>
-                      <span className="font-medium">42</span>
+              <div className="bg-white p-6 rounded-xl border border-green-100">
+                <h3 className="text-lg font-bold mb-4 text-green-700">Community Stats</h3>
+                <div className="space-y-4">
+                  <div className="flex justify-between">
+                    <span className="text-gray-500">Members</span>
+                    <span className="font-medium">2,547</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-500">Discussions</span>
+                    <span className="font-medium">342</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-500">Comments</span>
+                    <span className="font-medium">1,203</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-500">Online Now</span>
+                    <span className="font-medium">42</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white p-6 rounded-xl border border-green-100">
+                <h3 className="text-lg font-bold mb-4 text-green-700">Top Contributors</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <Image
+                      src="/placeholder.svg?height=40&width=40"
+                      alt="User"
+                      width={40}
+                      height={40}
+                      className="rounded-full"
+                    />
+                    <div>
+                      <div className="font-medium">EcoWarrior</div>
+                      <div className="text-sm text-gray-500">124 contributions</div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Top Contributors</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <Image
-                        src="/placeholder.svg?height=40&width=40"
-                        alt="User"
-                        width={40}
-                        height={40}
-                        className="rounded-full"
-                      />
-                      <div>
-                        <div className="font-medium">EcoWarrior</div>
-                        <div className="text-sm text-muted-foreground">124 contributions</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Image
-                        src="/placeholder.svg?height=40&width=40"
-                        alt="User"
-                        width={40}
-                        height={40}
-                        className="rounded-full"
-                      />
-                      <div>
-                        <div className="font-medium">GreenThumb</div>
-                        <div className="text-sm text-muted-foreground">98 contributions</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Image
-                        src="/placeholder.svg?height=40&width=40"
-                        alt="User"
-                        width={40}
-                        height={40}
-                        className="rounded-full"
-                      />
-                      <div>
-                        <div className="font-medium">SustainableLiving</div>
-                        <div className="text-sm text-muted-foreground">87 contributions</div>
-                      </div>
+                  <div className="flex items-center gap-3">
+                    <Image
+                      src="/placeholder.svg?height=40&width=40"
+                      alt="User"
+                      width={40}
+                      height={40}
+                      className="rounded-full"
+                    />
+                    <div>
+                      <div className="font-medium">GreenThumb</div>
+                      <div className="text-sm text-gray-500">98 contributions</div>
                     </div>
                   </div>
-                </CardContent>
-                <CardFooter>
-                  <Button variant="outline" className="w-full">
-                    View All Contributors
-                  </Button>
-                </CardFooter>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Popular Tags</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">#zero-waste</span>
-                    <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">#recycling</span>
-                    <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
-                      #sustainable-living
-                    </span>
-                    <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">#plastic-free</span>
-                    <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">#composting</span>
-                    <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">#eco-friendly</span>
-                    <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">#minimalism</span>
+                  <div className="flex items-center gap-3">
+                    <Image
+                      src="/placeholder.svg?height=40&width=40"
+                      alt="User"
+                      width={40}
+                      height={40}
+                      className="rounded-full"
+                    />
+                    <div>
+                      <div className="font-medium">SustainableLiving</div>
+                      <div className="text-sm text-gray-500">87 contributions</div>
+                    </div>
                   </div>
-                </CardContent>
-                <CardFooter>
-                  <Button variant="outline" className="w-full">
-                    Browse All Tags
-                  </Button>
-                </CardFooter>
-              </Card>
+                </div>
+                <Button variant="outline" className="w-full mt-4">
+                  View All Contributors
+                </Button>
+              </div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Join Our Community</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Create an account to participate in discussions, track your environmental impact, and connect with
-                    like-minded individuals.
-                  </p>
-                  <Button className="w-full bg-green-600 hover:bg-green-700">
-                    <User className="h-4 w-4 mr-2" />
-                    Sign Up
-                  </Button>
-                </CardContent>
-              </Card>
+              <div className="bg-white p-6 rounded-xl border border-green-100">
+                <h3 className="text-lg font-bold mb-4 text-green-700">Popular Tags</h3>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">#zero-waste</span>
+                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">#recycling</span>
+                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">#sustainable-living</span>
+                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">#plastic-free</span>
+                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">#composting</span>
+                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">#eco-friendly</span>
+                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">#minimalism</span>
+                </div>
+                <Button variant="outline" className="w-full mt-4">
+                  Browse All Tags
+                </Button>
+              </div>
+
+              <div className="bg-white p-6 rounded-xl border border-green-100">
+                <h3 className="text-lg font-bold mb-4 text-green-700">Join Our Community</h3>
+                <p className="text-sm text-gray-500 mb-4">
+                  Create an account to participate in discussions, track your environmental impact, and connect with
+                  like-minded individuals.
+                </p>
+                <Button className="w-full bg-green-600 hover:bg-green-700">
+                  <User className="h-4 w-4 mr-2" />
+                  Sign Up
+                </Button>
+              </div>
             </div>
           </div>
         </div>
