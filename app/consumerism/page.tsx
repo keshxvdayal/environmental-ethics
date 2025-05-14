@@ -140,60 +140,54 @@ export default function ConsumerismPage() {
             <h2 className="text-3xl font-bold text-center mb-12">Sustainable Alternatives</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-white p-8 rounded-lg shadow-md">
-                <h3 className="text-2xl font-bold mb-4 text-blue-700">Conscious Consumption</h3>
+                <h3 className="text-2xl font-bold mb-4 text-green-700">Conscious Consumption</h3>
                 <ul className="space-y-4 mb-6">
                   <li className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-blue-600 mr-2 mt-1 flex-shrink-0" />
+                    <ArrowRight className="h-5 w-5 text-green-700 mr-2 mt-1 flex-shrink-0" />
                     <span>Buy less, choose well, make it last. Focus on quality over quantity.</span>
                   </li>
                   <li className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-blue-600 mr-2 mt-1 flex-shrink-0" />
+                    <ArrowRight className="h-5 w-5 text-green-700 mr-2 mt-1 flex-shrink-0" />
                     <span>Research brands' environmental policies and support those with sustainable practices.</span>
                   </li>
                   <li className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-blue-600 mr-2 mt-1 flex-shrink-0" />
+                    <ArrowRight className="h-5 w-5 text-green-700 mr-2 mt-1 flex-shrink-0" />
                     <span>Consider second-hand, repaired, or refurbished items before buying new.</span>
                   </li>
                 </ul>
-                <Button asChild className="bg-blue-600 hover:bg-blue-700">
-                  <Link href="/tools/sustainable-brands">Explore Sustainable Brands</Link>
-                </Button>
+                
               </div>
               <div className="bg-white p-8 rounded-lg shadow-md">
-                <h3 className="text-2xl font-bold mb-4 text-blue-700">Circular Economy</h3>
+                <h3 className="text-2xl font-bold mb-4 text-green-700">Circular Economy</h3>
                 <ul className="space-y-4 mb-6">
                   <li className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-blue-600 mr-2 mt-1 flex-shrink-0" />
+                    <ArrowRight className="h-5 w-5 text-green-700 mr-2 mt-1 flex-shrink-0" />
                     <span>Support products designed for longevity, repairability, and recyclability.</span>
                   </li>
                   <li className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-blue-600 mr-2 mt-1 flex-shrink-0" />
+                    <ArrowRight className="h-5 w-5 text-green-700 mr-2 mt-1 flex-shrink-0" />
                     <span>Participate in sharing economies, rentals, and product-service systems.</span>
                   </li>
                   <li className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-blue-600 mr-2 mt-1 flex-shrink-0" />
+                    <ArrowRight className="h-5 w-5 text-green-700 mr-2 mt-1 flex-shrink-0" />
                     <span>Look for products made from recycled materials or renewable resources.</span>
                   </li>
                 </ul>
-                <Button asChild className="bg-blue-600 hover:bg-blue-700">
-                  <Link href="/learn/circular-economy">Learn About Circular Economy</Link>
-                </Button>
+                
               </div>
             </div>
           </div>
         </section>
 
         {/* Call to Action */}
-        <section className="py-16 bg-blue-800 text-white">
+        <section className="py-16 bg-green-900 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6">Take the Sustainable Consumer Pledge</h2>
             <p className="text-xl max-w-3xl mx-auto mb-8">
               Join thousands of others committed to reducing their environmental footprint through mindful consumption
               habits.
             </p>
-            <Button asChild size="lg" className="bg-white text-blue-800 hover:bg-gray-100">
-              <Link href="/pledge">Take the Pledge</Link>
-            </Button>
+          
           </div>
         </section>
       </main>

@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link"
 import { ArrowRight, BarChart3, Leaf, MessageSquare, Recycle } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -5,8 +6,15 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import Image from "next/image"
 import image from "../public/image.png"
 import { AIChat } from "@/components/AIChat"
+import { useState } from 'react';
 
 export default function Home() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen);
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <header className="bg-green-800 text-white">
@@ -23,18 +31,18 @@ export default function Home() {
                 </Link>
               </li>
               <li>
-                <Link href="/consumerism" className="hover:underline">
-                  Consumerism
+                <Link href="/aboutus" className="hover:underline">
+                  About Us
                 </Link>
               </li>
               <li>
-                <Link href="/waste" className="hover:underline">
-                  Waste Management
+                <Link href="/features" className="hover:underline">
+                  Features
                 </Link>
               </li>
               <li>
-                <Link href="/tools" className="hover:underline">
-                  Tools
+                <Link href="/blogs" className="hover:underline">
+                  Blogs
                 </Link>
               </li>
               <li>
@@ -49,7 +57,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b px-8 flex justify-between from-green-700 to-green-900 text-white py-20">
+        <section className="bg-gradient-to-b px-8 flex justify-between from-[#6ea900] to-[#6ea900] text-white py-20">
           <div className="flex flex-col justify-center">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Environmental Ethics</h1>
@@ -57,14 +65,7 @@ export default function Home() {
               Exploring the moral relationship between humans and the natural environment, focusing on consumerism and
               waste management.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button asChild size="lg" className="bg-white text-green-800 hover:bg-gray-100">
-                <Link href="/tools">Explore Our Tools</Link>
-              </Button>
-              <Button asChild size="lg" className="border-white text-white hover:bg-green-800">
-                <Link href="/learn">Learn More</Link>
-              </Button>
-            </div>
+          
           </div>
           </div>
           <div>
@@ -72,7 +73,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features Section */}
+        {/* Features Section - REMOVED AND MOVED TO /features */}
+        {/*
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12">Interactive Features</h2>
@@ -146,8 +148,10 @@ export default function Home() {
             </div>
           </div>
         </section>
+        */}
 
-        {/* Topics Overview */}
+        {/* Topics Overview - REMOVED AND MOVED TO /blogs */}
+        {/*
         <section className="py-16">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12">Key Topics</h2>
@@ -177,8 +181,10 @@ export default function Home() {
             </div>
           </div>
         </section>
+        */}
 
         {/* AI Assistant Section */}
+        {/* 
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12">Ask Our AI Assistant</h2>
@@ -189,7 +195,31 @@ export default function Home() {
             <AIChat />
           </div>
         </section>
+        */}
       </main>
+
+      {/* Chatbot Icon and Popup */}
+      <button
+        onClick={toggleChat}
+        className="fixed bottom-8 right-8 bg-green-600 hover:bg-green-700 text-white p-4 rounded-full shadow-lg z-50"
+        aria-label="Toggle chat"
+      >
+        <MessageSquare className="h-6 w-6" />
+      </button>
+
+      {isChatOpen && (
+        <div className="fixed bottom-24 right-8 w-80 h-96 bg-white rounded-lg shadow-xl z-50 flex flex-col">
+          <div className="p-4 bg-green-700 text-white rounded-t-lg flex justify-between items-center">
+            <h3 className="font-semibold">AI Chat</h3>
+            <button onClick={toggleChat} className="text-white hover:text-gray-200">
+              &times; {/* Close icon */}
+            </button>
+          </div>
+          <div className="p-4 flex-1 overflow-y-auto">
+            <AIChat />
+          </div>
+        </div>
+      )}
 
       <footer className="bg-green-900 text-white py-8">
         <div className="container mx-auto px-4">
